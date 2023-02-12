@@ -3,13 +3,16 @@ package com.example.demoweb.service;
 import com.example.demoweb.model.Post;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class PostService {
-    public List<Post> listAllPosts(){
+    List<Post> posts;
+    PostService()
+    {
         var post1 = new Post("Чем отличается курящий газовщик от моджахеда?\n" +
                 "моджахед знает, когда взорвётся", new Date());
         var post2 = new Post("Как называется курица с ментальным расстройством?\n" +
@@ -21,6 +24,13 @@ public class PostService {
                 "Девушка:\n" +
                 " - А ружьё то мне зачем?\n" +
                 " - А это если я с дерева упаду - стреляйте в Кефирчика", new Date());
-        return Arrays.asList(post1, post2, post3);
+        posts = new ArrayList<>();
+        posts.addAll(Arrays.asList(post1, post2, post3));
+    }
+    public List<Post> listAllPosts(){
+        return posts;
+    }
+    public void create(String text) {
+        posts.add(new Post(text, new Date()));
     }
 }
