@@ -13,11 +13,11 @@ public class PostService {
     List<Post> posts;
     PostService()
     {
-        var post1 = new Post("Чем отличается курящий газовщик от моджахеда?\n" +
+        var post1 = new Post(0L,"Чем отличается курящий газовщик от моджахеда?\n" +
                 "моджахед знает, когда взорвётся", new Date());
-        var post2 = new Post("Как называется курица с ментальным расстройством?\n" +
+        var post2 = new Post(1L,"Как называется курица с ментальным расстройством?\n" +
                 "куропатка", new Date());
-        var post3 = new Post("Звонит девушка в службу спасения и говорит:\n" +
+        var post3 = new Post(2L,"Звонит девушка в службу спасения и говорит:\n" +
                 "- Медведь на дереве застрял.\n" +
                 "Приходит мужик с маленькой собачкой и говорит:\n" +
                 "- Познакомьтесь это Кефирчик. Вот вам ружье, я сейчас залезу на дерево и скину медведя, а собака его за яйца и в зоопарк.\n" +
@@ -31,6 +31,6 @@ public class PostService {
         return posts;
     }
     public void create(String text) {
-        posts.add(new Post(text, new Date()));
+        posts.add(new Post( listAllPosts().parallelStream().count() + 1, text, new Date()));
     }
 }
