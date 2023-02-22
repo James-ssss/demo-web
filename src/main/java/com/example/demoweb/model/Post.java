@@ -1,39 +1,58 @@
 package com.example.demoweb.model;
 
+import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
-public class Post {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Post implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String text;
     private Integer likes;
-
-    private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
     private Date creationDate;
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Post(Long id, String text) {
+        this.id = id;
+        this.text = text;
+        Calendar cal = Calendar.getInstance();
+        this.creationDate = cal.getTime();
+        this.likes = Math.abs(new Random().nextInt(100));
+    }
+
+    public Post() {
+
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getText() {
+        return this.text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Integer getLikes() {
-        return likes;
+        return this.likes;
     }
 
     public void setLikes(Integer likes) {
         this.likes = likes;
     }
 
-    public String getText() {
-        return text;
-    }
-    public Post(Long id, String text, Date date)
-    {
-        this.text = text;
-        this.likes = 0;
-        this.creationDate = date;
-        this.id = id;
+    public Date getCreationDate() {
+        return this.creationDate;
     }
 }
